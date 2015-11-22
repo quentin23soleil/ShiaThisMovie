@@ -1,0 +1,34 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SHIA THIS !!!!</title>
+    <link rel="stylesheet" href="{%  static 'css/style.css' %}"/>
+    <link rel="script" href="{%  static 'js/ga.js' %}"/>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+</head>
+<body style="background:url('http://image.tmdb.org/t/p/original/{{ movie.poster_path }}')">
+<main id="shia">
+    <div id=movie >
+        <p>{{ movie.title }}</p>
+        <p>({{ date }})</p>
+        <iframe style="margin-top: 10px" width="560" height="315" src="https://www.youtube.com/embed/{{ trailer_key }}"
+                frameborder="0"
+                allowfullscreen></iframe>
+    </div>
+
+    <form action="{% url "app.views.home" %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ movie.id }}"/>
+        <input type="hidden" name="title" value="{{ movie.title }}"/>
+        <ul>
+            <li><input type="image" name="rating" value="0" class="rating" src="{% static 'images/boring-asleep.gif' %}"></li>
+            <li><input type="image" name="rating" value="1" class="rating" src="{% static 'images/boring.gif' %}"></li>
+            <li><input type="image" name="rating" value="2" class="rating" src="{% static 'images/funny-funny.gif' %}"></li>
+            <li><input type="image" name="rating" value="3" class="rating" src="{% static 'images/bravo-bravo.gif' %}"></li>
+        </ul>
+    </form>
+</main>
+</body>
+</html>
